@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import { Base } from '../Base';
+import { setCart } from '../api/products';
 
 export class ProductCard extends Base {
   constructor() {
@@ -26,7 +27,8 @@ export class ProductCard extends Base {
 
   render() {
     return html`
-      <a href="/product/${this.product.id}" class="card">
+      <div  class="card">
+      <a href="/product/${this.product.id}">
         <header>
           <figure>
             <div class="placeholder ${this.loaded ? "fade": ""}" style="background-image: url(http://localhost:9000/image/24/${this.product.image})"></div>
@@ -38,7 +40,12 @@ export class ProductCard extends Base {
           <p>${this.product.description}</p>
         </main>
       </a>
+      <p>
+        <button @click="${() => setCart(this.product)}">Add to cart</button>
+      </p>
+      </div>
     `;
   }
+
 }
 customElements.define('product-card', ProductCard);
